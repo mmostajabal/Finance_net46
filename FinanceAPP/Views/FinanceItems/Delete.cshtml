@@ -1,0 +1,55 @@
+﻿@using FinanceShared
+@model FinancialItemsDTO
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@using (@Html.BeginForm("Delete", "FinanceItems", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.FinancialId)
+
+    <div class="mb-3">
+        @Html.DisplayNameFor(m => m.PARTNER_ID)
+        @Html.DisplayFor(m => m.PARTNER_ID)
+    </div>
+
+    <div class="mb-3">
+        @Html.DisplayNameFor(m => m.Amount)
+        @Html.DisplayFor(m => m.Amount)
+
+    </div>
+
+    <div class="mb-3">
+        @Html.DisplayNameFor(m => m.Date)
+        @Model.Date.ToString("yyyy-MM-dd")
+    </div>
+    <div class="bg-secondary p-2 rounded">
+        <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+
+        <a href="@Url.Action("FinancialItem", "FinanceItems")" class="btn btn-secondary p-2"><i class="bi bi-arrow-return-left"></i> Return</a>
+    </div>
+    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" value="Delete" class="btn btn-danger mx-3 mt-3 p-2">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

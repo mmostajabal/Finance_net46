@@ -1,0 +1,11 @@
+﻿
+<h2>@TempData["header"]</h2>
+<hr />
+@if (TempData["success"] != null)
+{
+    <h4 class="alert alert-success">@TempData["success"]</h4>
+}
+@if (TempData["error"] != null) { 
+    <h4 class="alert alert-danger">@TempData["error"]</h4>
+}
+

@@ -1,0 +1,42 @@
+﻿@using FinanceShared
+@model IList<FinancialItemsDTO>
+@{
+    ViewData["Title"] = "FinancialItem";
+    
+}
+
+<div class="container">
+    <div class="text-end">
+        <a href="@Url.Action("Create", "FinanceItems")" class="btn btn-primary mb-3"><i class="bi bi-plus-circle"></i> Create</a>
+    </div>
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th class="col-5 text-center">Patner Id</th>
+                <th class="col-2 text-center">Amount</th>
+                <th class="col-2 text-center">Date</th>
+                <th class="col-3 text-center">Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (FinancialItemsDTO financialItem in Model)
+            {
+                <tr>
+                    <td>@financialItem.PARTNER_ID</td>
+                    <td class="text-center">@financialItem.Amount</td>
+                    <td class="text-center">@financialItem.Date.ToString("yyyy-MM-dd")</td>
+                    <td>
+
+
+                        <a href="@Url.Action("Edit", "FinanceItems", new { financialId = financialItem.FinancialId })">Edit</a> |
+                        <a href="@Url.Action("Details", "FinanceItems", new { financialId = financialItem.FinancialId })">Details</a> |
+                        <a href="@Url.Action("Delete", "FinanceItems", new { financialId = financialItem.FinancialId })">Delete</a> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
