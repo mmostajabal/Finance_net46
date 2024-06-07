@@ -60,7 +60,7 @@ namespace FinanceService.Services.TransferExcel2List
                             {
                                 prop = type.GetProperty(columnsHeader[column]);
 
-                                prop.SetValue(curObj, Convert.ChangeType(reader.GetValue(column) ?? "" , Type.GetType(prop.PropertyType.FullName)));
+                                prop.SetValue(curObj, Convert.ChangeType(reader.GetValue(column) ?? SetDefaultValue(Type.GetType(prop.PropertyType.FullName)) , Type.GetType(prop.PropertyType.FullName)));
 
                             }
                             values.Add(curObj);
@@ -72,6 +72,27 @@ namespace FinanceService.Services.TransferExcel2List
 
             return values;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private String SetDefaultValue(Type type)
+        {
+            String result = "";
+           switch(type.Name) { 
+                case "Decimal":
+                    result = "0";
+                    break;
+                default:
+                    result = "";
+                    break;
+            }
+
+            return result;
+        }
+
+
     }
 
 }
