@@ -5,10 +5,11 @@
 }
 
 <div class="container">
-    <table class="table table-bordered table-striped table-responsive">
+    <table id="PartnerTbl" class="table table-bordered table-striped table-responsive">
         <thead>
             <tr>
-                <th class="col-6">Partner Id</th>
+                <th class="col-1" hidden>order</th>
+                <th class="col-4">Partner Id</th>
                 <th class="col-3">ParentId</th>
                 <th class="col-3">Fee Percent</th>
             </tr>
@@ -17,7 +18,8 @@
             @foreach (PartnersDTO partner in Model)
             {
                 <tr>
-                    <td>@partner.Partner_Id</td>
+                    <td hidden>@partner.Order</td>
+                    <td>@partner.Partner_Id </td>
                     <td>@partner.Parent_Partner_Id</td>
                     <td>@partner.Fee_Percent</td>
                 </tr>
@@ -26,5 +28,15 @@
 
     </table>
 </div>
-
+<script>
+    $(document).ready(function () {
+        
+        try {
+            $('#PartnerTbl').DataTable({ "responsive": true, "paging": false, dom: 'Bfrtip', buttons: ['excel', 'print'] });
+        } catch (e) {
+            alert(e.toString());
+        }
+        
+    });
+</script>
 

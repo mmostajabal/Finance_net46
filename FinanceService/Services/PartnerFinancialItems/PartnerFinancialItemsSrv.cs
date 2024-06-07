@@ -135,13 +135,13 @@ namespace FinanceService.Services.PartnerFinancialItems
                     on child.Partner_Id equals financialItem.Partner_Id
                     join financialItemParent in _financialItamSrv.GetAll().GroupBy(g => g.PARTNER_ID).Select(s => new { Partner_Id = s.Key, ParentTotalAmount = s.Sum(o => o.Amount) })
                     on parnet.Partner_Id equals financialItemParent.Partner_Id
-                     
+
                     group new { parnet, child, financialItem.TotalAmount, financialItemParent.ParentTotalAmount } by new { parnet.Partner_Id } into parnetGroup
                     select new CalculateMembersDTO()
                     {
                         Partner_Id = parnetGroup.Key.Partner_Id,
-                        Result = parnetGroup.Sum(o => Math.Round(((o.parnet.Fee_Percent - o.child.Fee_Percent) * o.TotalAmount) / 100,2)),
-                        Own = parnetGroup.Select(o => Math.Round((o.ParentTotalAmount * o.parnet.Fee_Percent) / 100, 2)).FirstOrDefault(),
+                        Result = parnetGroup.Sum(o => Math.Round(((o.parnet.Fee_Percent - o.child.Fee_Percent) * o.TotalAmount) / 100, 3)),
+                        Own = parnetGroup.Select(o => Math.Round((o.ParentTotalAmount * o.parnet.Fee_Percent) / 100, 3)).FirstOrDefault(),
                         TotalAmount = parnetGroup.Select(o => o.ParentTotalAmount).FirstOrDefault(),
                         Fee_Percent = parnetGroup.Select(o => o.parnet.Fee_Percent).FirstOrDefault(),
 
@@ -155,7 +155,7 @@ namespace FinanceService.Services.PartnerFinancialItems
                              {
                                  Partner_Id = parnetGroup.Key.Partner_Id,
                                  Result = 0,
-                                 Own = parnetGroup.Sum(o => Math.Round((o.TotalAmount * o.child.Fee_Percent) / 100, 2)),
+                                 Own = parnetGroup.Sum(o => Math.Round((o.TotalAmount * o.child.Fee_Percent) / 100, 3)),
                                  TotalAmount = parnetGroup.Select(o => o.TotalAmount).FirstOrDefault(),
                                  Fee_Percent = parnetGroup.Select(o => o.child.Fee_Percent).FirstOrDefault(),
 

@@ -18,9 +18,10 @@ namespace FinanceService.Services.UploadFile
         /// <param name="path"></param>
         /// <param name="file"></param>
         /// <returns>File Name</returns>
+        
         public string UploadFile(string path, HttpPostedFileBase file)
         {
-
+           
 
             String  FileExtension, FileDate, CopyFileName;
             CopyFileName = "";

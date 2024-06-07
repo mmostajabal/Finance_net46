@@ -2,14 +2,14 @@
 @model IList<FinancialItemsDTO>
 @{
     ViewData["Title"] = "FinancialItem";
-    
+
 }
 
 <div class="container">
     <div class="text-end">
         <a href="@Url.Action("Create", "FinanceItems")" class="btn btn-primary mb-3"><i class="bi bi-plus-circle"></i> Create</a>
     </div>
-    <table class="table table-bordered table-striped table-responsive">
+    <table id="financialTbl" class="table table-bordered table-striped table-responsive">
         <thead>
             <tr>
                 <th class="col-5 text-center">Patner Id</th>
@@ -30,7 +30,7 @@
 
                         <a href="@Url.Action("Edit", "FinanceItems", new { financialId = financialItem.FinancialId })">Edit</a> |
                         <a href="@Url.Action("Details", "FinanceItems", new { financialId = financialItem.FinancialId })">Details</a> |
-                        <a href="@Url.Action("Delete", "FinanceItems", new { financialId = financialItem.FinancialId })">Delete</a> 
+                        <a href="@Url.Action("Delete", "FinanceItems", new { financialId = financialItem.FinancialId })">Delete</a>
                     </td>
                 </tr>
             }
@@ -39,4 +39,15 @@
     </table>
 </div>
 
+<script>
+    $(document).ready(function () {
+
+        try {
+            $('#financialTbl').DataTable({ "responsive": true, "paging": false, dom: 'Bfrtip', buttons: ['excel', 'print'] });
+        } catch (e) {
+            alert(e.toString());
+        }
+
+    });
+</script>
 

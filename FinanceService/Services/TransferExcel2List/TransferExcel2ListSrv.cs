@@ -60,7 +60,7 @@ namespace FinanceService.Services.TransferExcel2List
                             {
                                 prop = type.GetProperty(columnsHeader[column]);
 
-                                prop.SetValue(curObj, Convert.ChangeType(reader.GetValue(column), Type.GetType(prop.PropertyType.FullName)));
+                                prop.SetValue(curObj, Convert.ChangeType(reader.GetValue(column) ?? "" , Type.GetType(prop.PropertyType.FullName)));
 
                             }
                             values.Add(curObj);

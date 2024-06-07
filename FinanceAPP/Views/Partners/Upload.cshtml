@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Upload";
+}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        @using (@Html.BeginForm("Upload", "Partners", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="mb-3">
+                    <input type="file" id="file" name="file" class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Transfer</button>
+        }
+</div>
+

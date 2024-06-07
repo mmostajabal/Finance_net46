@@ -55,9 +55,15 @@ namespace FinanceAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(HttpPostedFileBase file)
         {
+           
             try
             {
-                string uploadFolder = Server.MapPath("~/Logs/FinanceItemFiles");
+                if(file == null) {
+                    TempData["header"] = "Upload Finance Items";
+                    return View(); 
+                }
+
+                string uploadFolder = Server.MapPath("~/Temp/FinanceItemFiles");
                 String message = "";
                 int numberRecords = 0;
 
